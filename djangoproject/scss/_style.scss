@@ -2184,7 +2184,7 @@ h2 + .list-link-soup {
     }
 }
 
-#doc-versions, #doc-languages {
+#doc-versions, #doc-languages, #faq-link {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 
@@ -2202,6 +2202,9 @@ h2 + .list-link-soup {
             padding: 8px 15px;
             border: 1px solid $gray-line;
             border-radius: 4px;
+        }
+        &.current-link {
+            display: inline-block;
         }
 
         a {
@@ -2254,12 +2257,6 @@ h2 + .list-link-soup {
 #outdated-warning {
     background-color: $red-light;
     color: $red-dark;
-}
-
-#s-getting-help {
-    // hiding getting help section because we moved it to sidebar, but because of docs being served
-    // on readthedocs, we still want to keep the content in.
-    display: none;
 }
 
 #docs-content {
