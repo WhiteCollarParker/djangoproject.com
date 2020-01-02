@@ -29,7 +29,10 @@
           <a href="{% url 'homepage' %}foundation/">About</a>
         </li>
         <li{% if 'fundraising' in request.path %} class="active"{% endif %}>
-          <a href="{% url 'fundraising:index' %}">&#9829; Donate</a>
+          <a href="{% url 'fundraising:index' %}">&#9829; Show</a>
+        </li>
+        <li class="active">
+          <a href="{% url 'fundraising:index' %}">&#9829; Showcase</a>
         </li>
       </ul>
     </div>

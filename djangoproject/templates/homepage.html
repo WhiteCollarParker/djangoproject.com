@@ -106,6 +106,10 @@
 
       {% donation_snippet %}
 
+      <h3>Monty Python Jokes</h3>
+      {% render_jokes 3 hide_readmore=True summary_first=True header_tag='h4' %}
+      <a href="{% url 'weblog:index' %}" class="link-readmore">More news</a>
+
       <h3>Latest news</h3>
       {% render_latest_blog_entries 2 hide_readmore=True summary_first=True header_tag='h4' %}
       <a href="{% url 'weblog:index' %}" class="link-readmore">More news</a>

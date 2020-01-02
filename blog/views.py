@@ -1,14 +1,17 @@
 from django.views.generic.dates import (
-    ArchiveIndexView, DateDetailView, DayArchiveView, MonthArchiveView,
+    ArchiveIndexView,
+    DateDetailView,
+    DayArchiveView,
+    MonthArchiveView,
     YearArchiveView,
 )
 
-from .models import Entry, Event
+from .models import Entry, Event, Joke
 
 
 class BlogViewMixin:
 
-    date_field = 'pub_date'
+    date_field = "pub_date"
     paginate_by = 10
 
     def get_allow_future(self):
@@ -27,7 +30,30 @@ class BlogViewMixin:
         if not self.request.user.is_staff:
             events_queryset = events_queryset.published()
 
-        context['events'] = events_queryset[:3]
+        context["events"] = events_queryset[:3]
+
+        return context
+
+
+class JokeViewMixin:
+
+    date_field = "pub_date"
+    paginate_by = 10
+
+    def get_allow_future(self):
+        return self.request.user.is_staff
+
+    def get_queryset(self):
+        return Joke.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        events_queryset = Joke.objects.future()
+        if not self.request.user.is_staff:
+            events_queryset = events_queryset.published()
+
+        context["events"] = events_queryset[:3]
 
         return context
 
@@ -49,4 +75,8 @@ class BlogDayArchiveView(BlogViewMixin, DayArchiveView):
 
 
 class BlogDateDetailView(BlogViewMixin, DateDetailView):
+    pass
+
+
+class JokeDateDetailView(JokeViewMixin, DateDetailView):
     pass
